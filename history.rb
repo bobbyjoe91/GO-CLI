@@ -1,5 +1,5 @@
-require_relative 'map.rb'
+require_relative 'go_ride.rb'
 
 class History
-
+	@@counter = 0
 end
