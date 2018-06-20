@@ -1,3 +1,4 @@
+require_relative 'generator.rb'
 require_relative 'user.rb'
 require_relative 'driver.rb'
 require_relative 'go_ride.rb'
