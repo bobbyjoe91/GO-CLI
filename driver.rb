@@ -1,21 +1,25 @@
 require_relative 'generator.rb'
-require_relative 'map.rb'
 
 class Driver
 	include Generate
+	attr_reader :locations, :driver
 	#initialize n*2 array of drivers
 	@@names = ["Anto","Benny","Chika","Darius","Echa","Farah","Gina","Hilman"]
 	
-	def initialize(n = 5)
-		@location = Array.new(n){Array.new(2){0}}
+	def initialize(n = 5, map_limit = 20)
+		#generate random x,y of driver
+		@locations = Array.new(n)
 		@driver = {}
-	end
-	def self.names(index = -1)
-		if index == -1
-			return @@names
-		else
-			return @@names[index]
+		for i in 0..n-1
+			@locations[i] = Generate::random_xy(map_limit)
+		end
+		lottery = Generate::random_array(n, 7)
+		for i in 0..n-1
+			@driver[@locations[i]] = @@names[lottery[i]]
 		end
 	end
 end
 
+d = Driver.new()
+print "#{d.locations()}"
+print "\n #{d.driver()}"

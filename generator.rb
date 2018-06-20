@@ -3,17 +3,17 @@ module Generate
 		coord = [0,0]
 		token = Array.new(limit){|num| num+1}
 		coord[0], coord[1] = token.sample, token.sample
-		
 		return coord
 	end
 	
-	def Generate.random_num(limit)
-		n = Array.new(limit){|num| num+1}
+	def Generate.random_num(limit) #random index generator
+		num = -1
+		n = Array.new(limit){num+=1}
 		return n.sample
 	end
 	
-	def Generate.random_array(amount, limit)
-		array = Array.new(amount){0}
+	def Generate.random_array(amount, limit) #generate unsorted array with range 0 to limit-1
+ 		array = Array.new(amount){-1}
 		for i in 0..amount-1
 			tmp = Generate::random_num(limit)
 			if !array.include?(tmp)
@@ -29,4 +29,3 @@ module Generate
 		return array
 	end
 end
-

@@ -2,7 +2,7 @@ require_relative 'user.rb'
 require_relative 'driver.rb'
 require_relative 'map.rb'
 
-class Goride
+class Go_ride
 	class initialize
 	end
 	class pick_driver(user_loc, driv_loc)
