@@ -19,7 +19,3 @@ class Driver
 		end
 	end
 end
-
-d = Driver.new()
-print "#{d.locations()}"
-print "\n #{d.driver()}"

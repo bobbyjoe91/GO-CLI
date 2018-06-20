@@ -2,7 +2,7 @@ require_relative 'go_ride.rb'
 
 class History
 	@@counter = 0
-	def initialize
+	def initialize()
 		
 	end
 	def showhistory

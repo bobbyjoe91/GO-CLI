@@ -3,12 +3,12 @@ require_relative 'driver.rb'
 require_relative 'map.rb'
 
 class Go_ride
-	class initialize
+	def initialize()
 	end
-	class pick_driver(user_loc, driv_loc)
+	def pick_driver(user_loc, driv_loc)
 	end
-	class show_route()
+	def show_route()
 	end
-	class confirm
+	def confirm
 	end
 end

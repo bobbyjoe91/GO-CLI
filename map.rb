@@ -1,8 +1,11 @@
 require_relative 'user.rb'
 
 class Map
-	def initialize()
+	attr_reader :map
+	def initialize(n)
+		
 	end
 	def showmap
+		print
 	end
 end
