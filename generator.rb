@@ -14,7 +14,7 @@ module Generate
 	
 	def Generate.random_array(amount, limit) #generate unsorted array with range 0 to limit-1
  		array = Array.new(amount){-1}
-		for i in 0..amount-1
+		for i in 0...amount
 			tmp = Generate::random_num(limit)
 			if !array.include?(tmp)
 				array[i] = tmp

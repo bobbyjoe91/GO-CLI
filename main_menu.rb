@@ -1,28 +1,4 @@
-require_relative 'generator.rb'
-require_relative 'user.rb'
-require_relative 'driver.rb'
-require_relative 'go_ride.rb'
-require_relative 'map.rb'
-require_relative 'history.rb'
-
-def command_box()
-	print "\nPlease enter the command: "
-	_command = gets.chomp
-	
-	if _command == "show map"
-		n, x, y, driver_num = ARGV
-		_map = Map.new()
-		_map.showmap
-		command_box()
-	elsif _command == "order go ride"
-		command_box()
-	elsif _command == "view history"
-		command_box()
-	elsif _command == "exit" || _command == "quit"
-	else 
-		puts "Invalid command. Please try again"
-	end   
-end
+require_relative 'input.rb'
 
 #MAIN MENU
 

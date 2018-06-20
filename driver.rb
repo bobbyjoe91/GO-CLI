@@ -6,7 +6,7 @@ class Driver
 	#initialize n*2 array of drivers
 	@@names = ["Anto","Benny","Chika","Darius","Echa","Farah","Gina","Hilman"]
 	
-	def initialize(n = 5, map_limit = 20)
+	def initialize(n, map_limit)
 		#generate random x,y of driver
 		@locations = Array.new(n)
 		@driver = {}

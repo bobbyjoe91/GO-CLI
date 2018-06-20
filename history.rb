@@ -5,10 +5,24 @@ class History
 	def initialize()
 		
 	end
-	def showhistory
+	def showHistory
 		
+	end
+	def writeHistory(bool = false)
+		_bool = Confirm.new(bool)
+		if _bool.trigger == true
+		
+		end
 	end
 	def self.counter
 		return @@counter
+	end
+end
+
+class Confirm
+	attr_reader :bool
+
+	def initialize(bool = false)
+		@trigger = bool
 	end
 end

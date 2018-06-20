@@ -9,6 +9,4 @@ class Go_ride
 	end
 	def show_route()
 	end
-	def confirm
-	end
 end
