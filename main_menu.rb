@@ -1,3 +1,9 @@
+require_relative 'user.rb'
+require_relative 'driver.rb'
+require_relative 'go_ride.rb'
+require_relative 'map.rb'
+require_relative 'history.rb'
+
 #MAIN MENU
 
 #splash screen
@@ -24,11 +30,11 @@ print "\nPlease enter the command: "
 command = gets.chomp
 
 #checking user's input
-if command == "view history"
-	
-elsif command == "show map"
-	
+if command == "show map"
+	n, x, y, driver_num = ARGV
 elsif command == "order go ride"
+	
+elsif command == "view history"
 
 else puts "Invalid command. Please try again"
 end                                        

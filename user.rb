@@ -1,9 +1,12 @@
+require_relative 'map.rb'
+
 class User
-	def initialize(x = -1, y = -1)
-		if x == -1 && y == -1
-			
-		else
-			@x, @y = x, y
-		end
+	def initialize(x, y)
+		@x = x
+		@y = y
+	end
+	def set_destination(i, j)
+		@i = i
+		@j = j
 	end
 end
