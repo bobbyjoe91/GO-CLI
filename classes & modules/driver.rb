@@ -2,7 +2,7 @@ require_relative 'generator.rb'
 
 class Driver
 	include Generate
-	attr_reader :locations, :driver
+	attr_accessor :locations
 	
 	def initialize(locations)
 		@locations = locations

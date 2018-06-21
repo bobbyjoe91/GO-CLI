@@ -21,6 +21,21 @@ module Command
 		flag = trip(_ride)
 		return flag
 	end
+	def Command.help
+		puts "\n                         GO-CLI's guide for user"
+		puts "\nshow map -- shows map indicating user's (V) and drivers'(O) location"
+		puts "order go ride -- allocates nearest driver to give user a lift"
+		puts "view history -- shows all trip user had made"
+		puts "clear history -- clean history"
+		puts "exit \\ quit -- close GO-CLI"
+		puts "about -- about developer"
+		puts "\n--------------------------------------------------------------------------------"
+	end
+	def Command.about
+		puts "\nDeveloped by Bobby Jonathan", "for SEA COMPFEST X 2nd assignment"
+		puts "Since 2018"
+		puts "---------------", "Found a bug?", "bobby.cool00763@gmail.com", "---------------"
+	end
 end
 
 #INPUT PROGRAM
@@ -59,23 +74,34 @@ elsif args.length == 1
 	user_x = _args0[1]-1
 	user_y = _args0[2]-1
 	driver_count = _args0[3]
+	if user_x > map_size || user_y > map_size || user_x < 0 || user_y < 0
+		puts "\nLocation is out of range. Please try again.\n"
+		exit
+	end
 	#inputing drivers' location
 	for i in 1..._args.length
 		_temp = _args[i].split(" ")
 		_temp[0] = _temp[0].to_i-1
 		_temp[1] = _temp[1].to_i-1
-		driver_location << _temp
+		if (_temp[0] < map_size && _temp[1] < map_size) && (_temp[0] >= 0 && _temp[1] >= 0)
+			driver_location << _temp
+		end
 	end
 #three params
 elsif args.length == 3
 	map_size = args[0].to_i
 	user_x = args[1].to_i-1
 	user_y = args[2].to_i-1
+	if user_x > map_size || user_y > map_size || user_x < 0 || user_y < 0
+		puts "\nLocation is out of range. Please try again.\n"
+		exit
+	end
 	driver_count = 5
 	for i in 0...driver_count
 		driver_location << Generate::random_xy(map_size-1)
 	end
 end
+
 #classes and vars init
 user_location = [user_x, user_y]
 _user = User.new(user_location)
@@ -92,21 +118,36 @@ while true
 		if flag == 1
 			#map change if trip has made
 			_user._loc = _user._dest
+			driver_location = []
+			for i in 0...driver_count
+				driver_location << Generate::random_xy(map_size-1)
+			end
+			_driver.locations = driver_location
 			map = Map.new(map_size, _user._loc, _driver.locations)
 		end
 		Command::show_map(map)
+		
 	elsif _command == "order go ride"
 		print "Set your destination: \n"
 		dest_x = STDIN.gets.chomp.to_i
 		dest_y = STDIN.gets.chomp.to_i
 		_user.destination = [dest_x-1, dest_y-1]
-		ride = Go_ride.new(_user._dest)
-		flag = Command::order(ride, _user._loc, _driver.locations,_unit_cost)
+		if _user._dest == _user._loc || !_user._dest[0].is_a?(Integer) || !_user._dest[1].is_a?(Integer)
+			puts "Invalid location. Please try again."
+		elsif _user._dest[0] > map_size || _user._dest[1] > map_size || _user._dest[1] < 0 || _user._dest[0] < 0
+			puts "Location is out of range. Please try again."
+		else
+			ride = Go_ride.new(_user._dest)
+			flag = Command::order(ride, _user._loc, _driver.locations,_unit_cost)
+		end
+		
 	elsif _command == "view history"
-		history_viewer
-	elsif _command == "erase history"
+		history_viewer #only accessible through GO-CLI.rb
+		
+	elsif _command == "clear history"
 		history_eraser
-		puts "History has been cleaned"
+		puts "History has been cleared"
+		
 	elsif _command == "exit" || _command == "quit"
 		print "\nThank you. See you next time"
 		for i in 1..3
@@ -114,12 +155,21 @@ while true
 			sleep(0.5)
 		end
 		exit
+		
 	elsif _command == "reset unit cost"
 		print "Insert new unit cost: "
 		_unit_cost = STDIN.gets.chomp.to_i
+		
+	elsif _command == "help"
+		Command::help
+		
+	elsif _command == "about"
+		Command::about
+		
 	else
 		puts "Invalid command. Please try again"
 	end
+	
 	print "\nPlease enter the command: "
 	_command = STDIN.gets.chomp
 end

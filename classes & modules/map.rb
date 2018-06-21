@@ -5,12 +5,12 @@ class Map
 	def initialize(size, user_location, driver_location)
 		@size = size
 		@map = Array.new(size){Array.new(size){"."}}
-		#mark user's location
-		@map[user_location[0]][user_location[1]] = "V"
 		#mark driver's location
 		for i in 0...driver_location.length
 			@map[driver_location[i][0]][driver_location[i][1]] = "O"
 		end
+		#mark user's location
+		@map[user_location[0]][user_location[1]] = "V"
 	end
 	def showmap
 		#printing map
