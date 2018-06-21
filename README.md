@@ -37,9 +37,9 @@ GO-CLI is able to open any document file extensions. There is a format of file i
 n user_row user_column m
 driver_row_1 driver_column_1
 driver_row_2 driver_column_2
-.           .
-.           .
-.           .
+.            .
+.            .
+.            .
 driver_row_m driver_column_m
 ```
 n is the size of the map. user_row and user_column denotes user position in column and row. m is the number of drivers available. 
