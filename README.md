@@ -32,7 +32,7 @@ Another yet powerful way to use GO-CLI is by typing the filename in the command 
 ```
 ruby GO-CLI.rb filename.extension
 ```
-GO-CLI is able to open any document file extensions. There is a format that you have to follow so GO-CLi can recognize your input.
+GO-CLI is able to open any document file extensions. There is a format of file input that you have to follow so GO-CLi can recognize your input.
 ```
 n user_row user_column m
 driver_row_1 driver_column_1
@@ -42,7 +42,9 @@ driver_row_2 driver_column_2
 .           .
 driver_row_m driver_column_m
 ```
-n is the size of the map. user_row and user_column denotes user position in column and row. m is the number of drivers available. This first line of input is ended with "Enter" or newline and each input is separated with space. The next m line is drivers' row and column position separated with space. First driver position to m-th driver position is ended with newline.
+n is the size of the map. user_row and user_column denotes user position in column and row. m is the number of drivers available. 
+
+This first line of input is ended with "Enter" or newline and each input is separated with space. The next m line is drivers' row and column position separated with space. First driver position to m-th driver position is ended with newline. You can open testcase1.txt as an example.
 
 This way of inputing will make each number distinguishable and make another users, drivers, and developers easy to read your input.
 
@@ -63,4 +65,13 @@ This way of inputing will make each number distinguishable and make another user
 Please enter the command: _
 
 ```
-This is the interface of GO-CLI main menu.
+This is the interface of GO-CLI main menu. For new user, it's recommended to type help in the CLI. Here are some command line user can input in GO-CLI
+```
+show map: shows map indicating user's (V) and drivers'(O) location
+order go ride: allocates nearest driver to give user a lift
+view history: shows all trip user had made
+clear history: clean history
+exit \ quit: close GO-CLI
+about: about developer & support
+```
+For driver, GO-CLI provides `reset unit cost` so driver can easily change 
