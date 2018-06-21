@@ -1,5 +1,7 @@
 require_relative 'go_ride.rb'
 
+require 'date'
+
 class History
 	@@counter = 0
 	def initialize()
@@ -16,15 +18,5 @@ class History
 	end
 	def self.counter
 		return @@counter
-	end
-end
-
-require 'date'
-
-class Confirm
-	attr_reader :bool
-
-	def initialize(bool = false)
-		@trigger = bool
 	end
 end

@@ -29,7 +29,45 @@ class Go_ride
 		@unit_price = price
 	end
 	def show_route
-		
+		@dest_tmp = @destination.map {|item| item+1}
+		@user_tmp = @user_loc.map {|item| item+1}
+		if @dest_tmp[0] < @user_tmp[0]
+			while @user_tmp[0] != @dest_tmp[0]
+				@user_tmp[0] -= 1
+				print " - go to ", @user_tmp, "\n" 
+			end
+			if @dest_tmp[1] < @user_tmp[1]
+				puts " - turn left"
+				while @user_tmp[1] != @dest_tmp[1]
+					@user_tmp[1] -= 1
+					print " - go to ", @user_tmp, "\n" 
+				end
+			else
+				puts " - turn right"
+				while @user_tmp[1] != @dest_tmp[1]
+					@user_tmp[1] += 1
+					print " - go to ", @user_tmp, "\n" 
+				end
+			end
+		else
+			while @user_tmp[0] != @dest_tmp[0]
+				@user_tmp[0] += 1
+				print " - go to ", @user_tmp, "\n" 
+			end
+			if @dest_tmp[1] < @user_tmp[1]
+				puts " - turn right"
+				while @user_tmp[1] != @dest_tmp[1]
+					@user_tmp[1] -= 1
+					print " - go to ", @user_tmp, "\n" 
+				end
+			else
+				puts " - turn left"
+				while @user_tmp[1] != @dest_tmp[1]
+					@user_tmp[1] += 1
+					print " - go to ", @user_tmp, "\n" 
+				end
+			end
+		end
 	end
 	def trip_price(destination)
 		@dest_dist = (destination[0]-@user_loc[0]).abs + (destination[1]-@user_loc[1]).abs + 1
@@ -37,11 +75,35 @@ class Go_ride
 	end
 end
 
+module Confirm
+	def Confirm.message
+		sleep(2)
+		puts "Yeay, you have arrived! Thank you"
+	end
+end
+
 def	trip(ride)
 	puts "======================================"
-	print "Your driver is Mr. ", ride.driver[0], ride.driver[1], "\n"
-	puts "Here is the route to your destination:\n"
-	ride.show_route
-	print "Here is your charge: Rp", ride.trip_price(ride.destination), "\n"
+	print "Your driver is Mr. #", ride.driver[0]+ride.driver[1], "\n"
+	puts "Route to your destination:\n"
+	ride.show_route()
+	print "Your charge: Rp", ride.trip_price(ride.destination), "\n"
 	puts "======================================"
+	
+	print "Confirm trip [Y/n]: "
+	ans = STDIN.gets.chomp
+	print "\n"
+	if ans == "Y" || ans == "y"
+		bool = true
+		print "Please wait...\n"
+	elsif
+		while(ans == "N" || ans == "n")
+			print "Please wait...\n"
+			sleep(2)
+			print "Confirm trip [Y/n]: "
+			ans = STDIN.gets.chomp
+			print "\n"
+		end
+	end
+	Confirm::message
 end
