@@ -46,5 +46,21 @@ n is the size of the map. user_row and user_column denotes user position in colu
 
 This way of inputing will make each number distinguishable and make another users, drivers, and developers easy to read your input.
 
-#### GO-CLI interface
+#### GO-CLI Main Menu
+```
+                                  WELCOME TO                  
+                  =========================================== 
+                  ██████╗  ██████╗        ██████╗ ██╗     ██╗
+                  ██╔════╝ ██╔═══██╗      ██╔════╝██║     ██║
+                  ██║  ███╗██║   ██║█████╗██║     ██║     ██║
+                  ██║   ██║██║   ██║╚════╝██║     ██║     ██║
+                  ╚██████╔╝╚██████╔╝      ╚██████╗███████╗██║
+                   ╚═════╝  ╚═════╝        ╚═════╝╚══════╝╚═╝
+                  =========================================== 
 
+                       type 'help' if you need more info
+
+Please enter the command: _
+
+```
+This is the interface of GO-CLI main menu.
