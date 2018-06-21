@@ -1,6 +1,7 @@
 require_relative 'user.rb'
 require_relative 'driver.rb'
 require_relative 'map.rb'
+require_relative 'history.rb'
 
 class Go_ride
 	attr_reader :driver, :unit_price, :price, :destination
@@ -82,6 +83,16 @@ module Confirm
 	end
 end
 
+module Exchange #json-like data for writing history
+	def Exchange.driver(ride)
+		driver_name = ride.driver[0] + ride.driver[1]
+		return driver_name
+	end
+	def Exchange.price(ride)
+		return ride.trip_price(ride.destination)
+	end
+end
+
 def	trip(ride)
 	puts "======================================"
 	print "Your driver is Mr. #", ride.driver[0]+ride.driver[1], "\n"
@@ -94,7 +105,6 @@ def	trip(ride)
 	ans = STDIN.gets.chomp
 	print "\n"
 	if ans == "Y" || ans == "y"
-		bool = true
 		print "Please wait...\n"
 	elsif
 		while(ans == "N" || ans == "n")
@@ -106,4 +116,5 @@ def	trip(ride)
 		end
 	end
 	Confirm::message
+	
 end

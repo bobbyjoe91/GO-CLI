@@ -6,10 +6,10 @@ class Map
 		@size = size
 		@map = Array.new(size){Array.new(size){"."}}
 		#mark user's location
-		@map[user_location[0]][user_location[1]] = "u"
+		@map[user_location[0]][user_location[1]] = "V"
 		#mark driver's location
 		for i in 0...driver_location.length
-			@map[driver_location[i][0]][driver_location[i][1]] = "d"
+			@map[driver_location[i][0]][driver_location[i][1]] = "O"
 		end
 	end
 	def showmap

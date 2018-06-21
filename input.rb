@@ -16,7 +16,8 @@ module Command
 		_ride.set_unit_cost()
 		trip(_ride)
 	end
-	def Command.show_history
+	def Command.view_history
+		history_viewer
 	end
 end
 
@@ -91,5 +92,5 @@ elsif _command == "order go ride"
 	Command::order(ride, _user._loc, _driver.locations)
 	#print _user._dest
 elsif _command == "view history"
-	
+	Command::view_history
 end
