@@ -10,7 +10,11 @@ module Command
 		_map.showmap
 	end
 	def Command.order(_ride,_userloc,_driverloc)
+		print "Searching nearest driver...\n"
+		sleep(3)
 		_ride.pick_driver(_userloc, _driverloc)
+		_ride.set_unit_cost()
+		trip(_ride)
 	end
 	def Command.show_history
 	end

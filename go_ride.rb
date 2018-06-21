@@ -3,7 +3,8 @@ require_relative 'driver.rb'
 require_relative 'map.rb'
 
 class Go_ride
-	attr_reader :driver
+	attr_reader :driver, :unit_price, :price, :destination
+	attr_writer :unit_price
 
 	def initialize(arr_dest)
 		@destination = arr_dest
@@ -24,7 +25,23 @@ class Go_ride
 			end
 		end
 	end
-	def show_route
-	
+	def set_unit_cost(price = 3500)
+		@unit_price = price
 	end
+	def show_route
+		
+	end
+	def trip_price(destination)
+		@dest_dist = (destination[0]-@user_loc[0]).abs + (destination[1]-@user_loc[1]).abs + 1
+		@price = @dest_dist*@unit_price
+	end
+end
+
+def	trip(ride)
+	puts "======================================"
+	print "Your driver is Mr. ", ride.driver[0], ride.driver[1], "\n"
+	puts "Here is the route to your destination:\n"
+	ride.show_route
+	print "Here is your charge: Rp", ride.trip_price(ride.destination), "\n"
+	puts "======================================"
 end
