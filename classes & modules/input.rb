@@ -74,7 +74,7 @@ elsif args.length == 1
 	user_x = _args0[1]-1
 	user_y = _args0[2]-1
 	driver_count = _args0[3]
-	if user_x > map_size || user_y > map_size || user_x < 0 || user_y < 0
+	if user_x > map_size || user_y > map_size || user_x < 0 || user_y < 0 || !user_x.is_a?(Integer) || !user_y.is_a?(Integer) || !map_size.is_a?(Integer)
 		puts "\nLocation is out of range. Please try again.\n"
 		exit
 	end
@@ -83,7 +83,7 @@ elsif args.length == 1
 		_temp = _args[i].split(" ")
 		_temp[0] = _temp[0].to_i-1
 		_temp[1] = _temp[1].to_i-1
-		if (_temp[0] < map_size && _temp[1] < map_size) && (_temp[0] >= 0 && _temp[1] >= 0)
+		if (_temp[0].is_a?(Integer) && _temp[1].is_a?(Integer)) && (_temp[0] < map_size && _temp[1] < map_size) && (_temp[0] >= 0 && _temp[1] >= 0)
 			driver_location << _temp
 		end
 	end
@@ -92,7 +92,7 @@ elsif args.length == 3
 	map_size = args[0].to_i
 	user_x = args[1].to_i-1
 	user_y = args[2].to_i-1
-	if user_x > map_size || user_y > map_size || user_x < 0 || user_y < 0
+	if user_x > map_size || user_y > map_size || user_x < 0 || user_y < 0 || !user_x.is_a?(Integer) || !user_y.is_a?(Integer) || !map_size.is_a?(Integer)
 		puts "\nLocation is out of range. Please try again.\n"
 		exit
 	end
