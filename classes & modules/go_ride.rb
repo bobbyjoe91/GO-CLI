@@ -92,7 +92,7 @@ end
 
 def route_printer(user_location, destination)
 	route = " - start at " + user_location.to_s + "\n"
-	if user_location[0] < destination[0]
+	if user_location[0] < destination[0] && user_location[1] != destination[1]
 		while user_location[0] != destination[0]
 			user_location[0] += 1
 			route += " - go to " + user_location.to_s + "\n" 
@@ -120,7 +120,7 @@ def route_printer(user_location, destination)
 				end
 			end
 		end
-	elsif user_location[0] > destination[0]
+	elsif user_location[0] > destination[0] && user_location[1] != destination[1]
 		while user_location[0] != destination[0]
 			user_location[0] -= 1
 			route += " - go to " + user_location.to_s + "\n" 
@@ -148,7 +148,29 @@ def route_printer(user_location, destination)
 				end
 			end
 		end
-	else
+	elsif user_location[1] == destination[1]
+		if	user_location[0] < destination[0]
+			while user_location[0] != destination[0]
+				if user_location[0]+1 == destination[0]
+					user_location[0] += 1
+					route += " - finish at " + user_location.to_s + "\n"
+				else
+					user_location[0] += 1
+					route += " - go to " + user_location.to_s + "\n"
+				end
+			end
+		else
+			while user_location[0] != destination[0]
+				if user_location[0]-1 == destination[0]
+					user_location[0] -= 1
+					route += " - finish at " + user_location.to_s + "\n"
+				else
+					user_location[0] -= 1
+					route += " - go to " + user_location.to_s + "\n"
+				end
+			end
+		end
+	elsif user_location[0] == destination[0]
 		if user_location[1] < destination[1]
 			while user_location[1] != destination[1]
 				if user_location[1]+1 == destination[1]

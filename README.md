@@ -104,14 +104,13 @@ To show the map, simply type `show map` in the CLI. The random map will look lik
 Once the map is printed, there are dots, a V and some Os. Dots (.) represent empty road in the area, V represents user's location, and O represents the drivers' location.
 
 #### Ordering Go-Ride
-The main service we give is Go-Ride. This app will connect you with at least five Go-Ride drivers around you. Simply type `order go ride`, and you'll have to input row and column of your destination
+The main service give to user is Go-Ride. This app will connect you with at least five Go-Ride drivers around you. Simply type `order go ride`, and you'll have to input row and column of your destination
 ```
 Set your destination 
 insert row: 4
 insert column: 5
-
 ```
-For better error-handling, we separate row value and column value so error on row value will not affect column value, vice versa.
+For better error-handling, row and column value is separated so error on row value will not affect column value, vice versa.
 
 Wait for a while until GO-CLI print the route of the trip
 ```
@@ -152,7 +151,7 @@ Yeay, you have arrived! Thank you
 ```
 
 #### Viewing History
-Type `view history` to view history. The history will your past order time, your location before the trip/ order, your destination, driver's name, the route from your past location to your past desination, and the price of the trip.
+Type `view history` to view history. The history will pass your past order time, your location before the trip/ order, your destination, driver's name, the route from your past location to your past desination, and the price of the trip.
 ```
 Please enter the command: view history
 
@@ -184,10 +183,24 @@ Price: Rp 59500
 
 ```
 
-### Program Control
-In GO-CLI.zip, we included a main menu file (GO-CLI.rb) and a "classes and modules" folder. In "classes and modules" folder, we included driver.rb, generator.rb, go_ride.rb, history.rb, input.rb, map.rb, and user.rb. These files manage different object. driver.rb is used for initializing driver object, and so does user.rb. User.rb store information about user location and destination. Input.rb manages three input mechanisms mention before, and it passes some variables to all classes in this program. 
+History can also be cleared completely by typing `clear history`.
 
-When user `show map`, method showmap in map.rb is called. User and drivers coordinate pass coordinate value to map.rb. 
+### For Developer: Program Control and Design Rationale
+In GO-CLI.zip, main menu file (GO-CLI.rb) and a "classes and modules" folder are included. "Classes and modules" folder includes driver.rb, generator.rb, go_ride.rb, history.rb, input.rb, map.rb, and user.rb. These files manage different object.
+
+Driver.rb is used for initializing driver object by passing array of coordinate of five or user-specified number of drivers.
+
+User.rb is used for initializing user object by its location. User class also has destination class to set and store its destination.
+
+If user specifies the number of drivers in input file, input.rb will parse the file and pass an array of driver coordinates as much as user specifies.
+
+Generator.rb is file with Generate module which used by input.rb to generate random coordinate
+
+Input.rb manages three input mechanisms mentioned before, and it passes variables to some classes and call all functions from all files in this program.
+
+
+
+When user `show map`, method showmap in map.rb is called.
 
 When user order go ride, input.rb passes user destination, user location, and drivers locations to go_ride.rb. A funtion called trip will uses Go_ride method like Go_ride.pick_drive to pick a nearest driver based on Manhattan distance, Go_ride.show_route to show the route to user and driver, and Go_ride.trip_price to count price of a ride based on unit cost and distance. After that Exchange module will pass some values to history.rb for history record.
 

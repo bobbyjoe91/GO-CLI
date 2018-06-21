@@ -37,6 +37,13 @@ module Command
 		puts "Since 2018"
 		puts "---------------", "Found a bug? Contact me", "bobby.cool00763@gmail.com", "---------------"
 	end
+	def Command.refresh(driver_count, map_size)
+		driver_location = []
+		for i in 0...driver_count
+			driver_location << Generate::random_xy(map_size-1)
+		end
+		return driver_location
+	end
 end
 
 #INPUT PROGRAM
@@ -50,8 +57,7 @@ args = ARGV
 if args.length == 0
 	map_size = 20
 	driver_count = 5
-	user_x = Generate::random_num(map_size-1)
-	user_y = Generate::random_num(map_size-1)
+	user_coord = Generate::random_xy(map_size-1)
 	for i in 0...driver_count
 		driver_location << Generate::random_xy(map_size-1)
 	end
@@ -74,6 +80,7 @@ elsif args.length == 1
 	map_size = _args0[0]
 	user_x = _args0[1]-1
 	user_y = _args0[2]-1
+	user_coord = [user_x, user_y]
 	driver_count = _args0[3]
 	if user_x > map_size || user_y > map_size || user_x < 0 || user_y < 0 || !user_x.is_a?(Integer) || !user_y.is_a?(Integer) || !map_size.is_a?(Integer)
 		puts "\nLocation is out of range. Please try again.\n"
@@ -93,6 +100,7 @@ elsif args.length == 3
 	map_size = args[0].to_i
 	user_x = args[1].to_i-1
 	user_y = args[2].to_i-1
+	user_coord = [user_x, user_y]
 	if user_x > map_size || user_y > map_size || user_x < 0 || user_y < 0 || !user_x.is_a?(Integer) || !user_y.is_a?(Integer) || !map_size.is_a?(Integer)
 		puts "\nLocation is out of range. Please try again.\n"
 		exit
@@ -104,7 +112,7 @@ elsif args.length == 3
 end
 
 #classes and vars init
-user_location = [user_x, user_y]
+user_location = user_coord
 _user = User.new(user_location)
 _driver = Driver.new(driver_location)
 _unit_cost = "default"
@@ -116,21 +124,16 @@ print "\nPlease enter the command: "
 _command = STDIN.gets.chomp
 while true
 	if _command == "show map"
-		if flag == 1
-			#map change if trip has made
+		if flag == 1 #map change if trip has been confirmed
 			_user._loc = _user._dest
-			driver_location = []
-			for i in 0...driver_count
-				driver_location << Generate::random_xy(map_size-1)
-			end
-			_driver.locations = driver_location
+			_driver.locations = Command::refresh(driver_count, map_size)
 			map = Map.new(map_size, _user._loc, _driver.locations)
 		end
 		Command::show_map(map)
 		
 	elsif _command == "order go ride"
 		print "\nSet your destination \n"
-		print "insert row: "
+		print "insert row   : "
 		dest_x = STDIN.gets.chomp.to_i
 		print "insert column: "
 		dest_y = STDIN.gets.chomp.to_i
@@ -140,7 +143,8 @@ while true
 		elsif dest_x-1 > map_size || dest_y-1 > map_size || dest_y-1 < 0 || dest_x-1 < 0
 			puts "Location is out of range. Please try again."
 		else
-			ride = Go_ride.new([dest_x-1, dest_y-1])
+			_user.destination = [dest_x-1, dest_y-1]
+			ride = Go_ride.new(_user._dest)
 			flag = Command::order(ride, _user._loc, _driver.locations,_unit_cost)
 		end
 		
@@ -168,6 +172,10 @@ while true
 		
 	elsif _command == "about"
 		Command::about
+		
+	elsif _command == "refresh"
+		_driver.locations = Command::refresh(driver_count, map_size)
+		map = Map.new(map_size, _user._loc, _driver.locations)
 		
 	else
 		puts "Invalid command. Please try again"
