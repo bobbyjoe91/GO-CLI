@@ -91,6 +91,9 @@ module Exchange #json-like data for writing history
 	def Exchange.price(ride)
 		return ride.trip_price(ride.destination)
 	end
+	def Exchange.destination(ride)
+		return ride.destination
+	end
 end
 
 def	trip(ride)
@@ -116,5 +119,5 @@ def	trip(ride)
 		end
 	end
 	Confirm::message
-	
+	history = History.new(ride)
 end

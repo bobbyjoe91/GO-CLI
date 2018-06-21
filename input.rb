@@ -21,6 +21,8 @@ module Command
 	end
 end
 
+#INPUT PROGRAM
+
 #init
 args = []
 driver_location = []
@@ -78,19 +80,32 @@ _user = User.new(user_location)
 _driver = Driver.new(driver_location)
 map = Map.new(map_size, _user._loc, _driver.locations)
 
-#program control
+#program flow
 print "\nPlease enter the command: "
 _command = STDIN.gets.chomp
-if _command == "show map"
-	Command::show_map(map)
-elsif _command == "order go ride"
-	print "Set your destination: \n"
-	dest_x = STDIN.gets.chomp.to_i
-	dest_y = STDIN.gets.chomp.to_i
-	_user.destination = [dest_x-1, dest_y-1]
-	ride = Go_ride.new(_user._dest)
-	Command::order(ride, _user._loc, _driver.locations)
-	#print _user._dest
-elsif _command == "view history"
-	Command::view_history
+while
+	if _command == "show map"
+		Command::show_map(map)
+	elsif _command == "order go ride"
+		print "Set your destination: \n"
+		dest_x = STDIN.gets.chomp.to_i
+		dest_y = STDIN.gets.chomp.to_i
+		_user.destination = [dest_x-1, dest_y-1]
+		ride = Go_ride.new(_user._dest)
+		Command::order(ride, _user._loc, _driver.locations)
+		#print _user._dest
+	elsif _command == "view history"
+		Command::view_history
+	elsif _command == "exit" || _command == "quit"
+		print "\nSee you next time"
+		for i in 1..3
+			print "."
+			sleep(0.5)
+		end
+		exit
+	else
+		puts "Invalid command. Please try again"
+	end
+	print "\nPlease enter the command: "
+	_command = STDIN.gets.chomp
 end
