@@ -32,7 +32,7 @@ Another yet powerful way to use GO-CLI is by typing the filename in the command 
 ```
 ruby GO-CLI.rb filename.extension
 ```
-GO-CLI is able to open any document file extensions. There is a format of file input that you have to follow so GO-CLi can recognize your input.
+GO-CLI is able to open any document file extensions. There is a format of file input that you have to follow so GO-CLI can recognize your input.
 ```
 n user_row user_column m
 driver_row_1 driver_column_1
