@@ -168,3 +168,10 @@ Price: Rp 84000
 ```
 
 ### Program Control
+In GO-CLI.zip, we included a main menu file (GO-CLI.rb) and a "classes and modules" folder. In "classes and modules" folder, we included driver.rb, generator.rb, go_ride.rb, history.rb, input.rb, map.rb, and user.rb. These files manage different object. driver.rb is used for initializing driver object, and so does user.rb. User.rb store information about user location and destination. Input.rb manages three input mechanisms mention before, and it passes some variables to all classes in this program. 
+
+When user `show map`, method showmap in map.rb is called. User and drivers coordinate pass coordinate value to map.rb. 
+
+When user order go ride, input.rb passes user destination, user location, and drivers locations to go_ride.rb. A funtion called trip will uses Go_ride method like Go_ride.pick_drive to pick a nearest driver based on Manhattan distance, Go_ride.show_route to show the route to user and driver, and Go_ride.trip_price to count price of a ride based on unit cost and distance. After that Exchange module will pass some values to history.rb for history record.
+
+The program simply read and print the content of trip_history.txt for `view history` command line. Txt file is chosen as its format because of its open-source and light charateristic so user can open it in any computer.
