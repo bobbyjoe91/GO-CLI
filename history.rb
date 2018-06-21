@@ -19,6 +19,8 @@ class History
 	end
 end
 
+require 'date'
+
 class Confirm
 	attr_reader :bool
 

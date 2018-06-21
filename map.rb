@@ -9,7 +9,7 @@ class Map
 		@map[user_location[0]][user_location[1]] = "u"
 		#mark driver's location
 		for i in 0...driver_location.length
-			@map[driver_location[i][0]-1][driver_location[i][1]-1] = "d"
+			@map[driver_location[i][0]][driver_location[i][1]] = "d"
 		end
 	end
 	def showmap
