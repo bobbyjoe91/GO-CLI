@@ -74,7 +74,7 @@ def	trip(ride)
 	print "Your driver is Mr. #", ride.driver[0]+ride.driver[1], "\n"
 	puts "Route to your destination:\n"
 	puts ride.show_route()
-	print "Your charge: Rp", ride.trip_price(ride.destination), "\n"
+	print "Trip price: Rp", ride.trip_price(ride.destination), "\n"
 	puts "======================================"
 	
 	print "Confirm trip [Y/n]: "

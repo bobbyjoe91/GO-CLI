@@ -7,7 +7,4 @@ class User
 	def initialize(arr_xy)
 		@_loc = arr_xy
 	end
-	def destination=(arr_ij)
-		@_dest = arr_ij
-	end
 end

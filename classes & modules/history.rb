@@ -15,9 +15,9 @@ class History
 		file.print "Order time: #{@time}\n"
 		file.puts "From: #{@from}"
 		file.puts "Destination: #{@destination}"
+		file.puts "Driver: Mr. ##{@driver_name}"
 		file.puts "Route: "
 		file.print @route
-		file.puts "Driver: Mr. ##{@driver_name}"
 		file.puts "Price: Rp #{@price}"
 		file.print "\n"
 		file.close

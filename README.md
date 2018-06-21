@@ -108,7 +108,6 @@ The main service we give is Go-Ride. This app will connect you with at least fiv
 ```
 Set your destination 
 insert row: 4
-
 insert column: 5
 
 ```
@@ -118,34 +117,31 @@ Wait for a while until GO-CLI print the route of the trip
 ```
 Searching nearest driver...
 ======================================
-Your driver is Mr. #25
+Your driver is Mr. #20
 Route to your destination:
- - go to [14, 16]
- - go to [13, 16]
- - go to [12, 16]
- - go to [11, 16]
- - go to [10, 16]
- - go to [9, 16]
- - go to [8, 16]
- - go to [7, 16]
- - go to [6, 16]
- - go to [5, 16]
- - go to [4, 16]
- - turn left
- - go to [4, 15]
- - go to [4, 14]
- - go to [4, 13]
- - go to [4, 12]
- - go to [4, 11]
- - go to [4, 10]
- - go to [4, 9]
- - go to [4, 8]
- - go to [4, 7]
- - go to [4, 6]
- - go to [4, 5]
-Your charge: Rp80500
+ - start at [17, 1]
+ - go to [16, 1]
+ - go to [15, 1]
+ - go to [14, 1]
+ - go to [13, 1]
+ - go to [12, 1]
+ - go to [11, 1]
+ - go to [10, 1]
+ - go to [9, 1]
+ - go to [8, 1]
+ - go to [7, 1]
+ - go to [6, 1]
+ - go to [5, 1]
+ - go to [4, 1]
+ - turn right
+ - go to [4, 2]
+ - go to [4, 3]
+ - go to [4, 4]
+ - finish at [4, 5]
+Trip price: Rp59500
 ======================================
-Confirm trip [Y/n]:
+Confirm trip [Y/n]: 
+
 ```
 If you cancel the trip, you'll be brought back to "Please enter the command: " menu. Else, your driver will go to your position and your trip will be recorded in history. Happy riding!
 ```
@@ -156,15 +152,35 @@ Yeay, you have arrived! Thank you
 ```
 
 #### Viewing History
-Type `view history` to view history. The history will like the following lines:
+Type `view history` to view history. The history will your past order time, your location before the trip/ order, your destination, driver's name, the route from your past location to your past desination, and the price of the trip.
 ```
 Please enter the command: view history
 
-Order time: Wednesday, 20 Jun 2018, 09:09:36
-From: [1, 1]
-Destination: [2, 2]
-Driver: Mr. #12
-Price: Rp 10500
+Order time: Thursday, 21 Jun 2018, 22:19:37
+From: [17, 1]
+Destination: [4, 5]
+Driver: Mr. #20
+Route: 
+ - start at [17, 1]
+ - go to [16, 1]
+ - go to [15, 1]
+ - go to [14, 1]
+ - go to [13, 1]
+ - go to [12, 1]
+ - go to [11, 1]
+ - go to [10, 1]
+ - go to [9, 1]
+ - go to [8, 1]
+ - go to [7, 1]
+ - go to [6, 1]
+ - go to [5, 1]
+ - go to [4, 1]
+ - turn right
+ - go to [4, 2]
+ - go to [4, 3]
+ - go to [4, 4]
+ - finish at [4, 5]
+Price: Rp 59500
 
 ```
 

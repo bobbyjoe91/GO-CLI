@@ -135,13 +135,12 @@ while true
 		print "insert column: "
 		dest_y = STDIN.gets.chomp.to_i
 		print "\n"
-		_user.destination = [dest_x-1, dest_y-1]
-		if _user._dest == _user._loc || !_user._dest[0].is_a?(Integer) || !_user._dest[1].is_a?(Integer)
+		if [dest_x-1, dest_y-1] == _user._loc || !(dest_x-1).is_a?(Integer) || !(dest_y-1).is_a?(Integer)
 			puts "Invalid location. Please try again."
-		elsif _user._dest[0] > map_size || _user._dest[1] > map_size || _user._dest[1] < 0 || _user._dest[0] < 0
+		elsif dest_x-1 > map_size || dest_y-1 > map_size || dest_y-1 < 0 || dest_x-1 < 0
 			puts "Location is out of range. Please try again."
 		else
-			ride = Go_ride.new(_user._dest)
+			ride = Go_ride.new([dest_x-1, dest_y-1])
 			flag = Command::order(ride, _user._loc, _driver.locations,_unit_cost)
 		end
 		
