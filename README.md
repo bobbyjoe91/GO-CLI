@@ -106,10 +106,65 @@ Once the map is printed, there are dots, a V and some Os. Dots (.) represent emp
 #### Ordering Go-Ride
 The main service we give is Go-Ride. This app will connect you with at least five Go-Ride drivers around you. Simply type `order go ride`, and you'll have to input row and column of your destination
 ```
-Please enter the command: order go ride
-Set your destination: 
-4
-4
+Set your destination 
+insert row: 4
+
+insert column: 5
 
 ```
-Notice that row 
+For better error-handling, we separate row value and column value so error on row value will not affect column value, vice versa.
+
+Wait for a while until GO-CLI print the route of the trip
+```
+Searching nearest driver...
+======================================
+Your driver is Mr. #25
+Route to your destination:
+ - go to [14, 16]
+ - go to [13, 16]
+ - go to [12, 16]
+ - go to [11, 16]
+ - go to [10, 16]
+ - go to [9, 16]
+ - go to [8, 16]
+ - go to [7, 16]
+ - go to [6, 16]
+ - go to [5, 16]
+ - go to [4, 16]
+ - turn left
+ - go to [4, 15]
+ - go to [4, 14]
+ - go to [4, 13]
+ - go to [4, 12]
+ - go to [4, 11]
+ - go to [4, 10]
+ - go to [4, 9]
+ - go to [4, 8]
+ - go to [4, 7]
+ - go to [4, 6]
+ - go to [4, 5]
+Your charge: Rp80500
+======================================
+Confirm trip [Y/n]:
+```
+If you cancel the trip, you'll be brought back to "Please enter the command: " menu. Else, your driver will go to your position and your trip will be recorded in history. Happy riding!
+```
+Confirm trip [Y/n]: Y
+
+Please wait...
+Yeay, you have arrived! Thank you
+```
+
+#### Viewing History
+Type `view history` to view history. The history will like the following lines:
+```
+Please enter the command: view history
+
+Order time: Thursday, 21 Jun 2018, 23:22:53
+Destination: [2, 4]
+Driver: Mr. #25
+Price: Rp 84000
+
+```
+
+### Program Control
