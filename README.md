@@ -46,7 +46,7 @@ n is the size of the map. user_row and user_column denotes user position in colu
 
 This first line of input is ended with "Enter" or newline and each input is separated with space. The next m line is drivers' row and column position separated with space. First driver position to m-th driver position is ended with newline. You can open testcase1.txt as an example.
 
-This way of inputing will make each number distinguishable and make another users, drivers, and developers easy to read your input.
+This way of inputing will make each number distinguishable and make another users, drivers, and developers easy to read your input. It is necessary to remember that the input file and GO-CLI.rb must be in the same directory.
 
 #### GO-CLI Main Menu
 ```
