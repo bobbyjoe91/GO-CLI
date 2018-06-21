@@ -4,7 +4,7 @@ require_relative 'map.rb'
 require_relative 'history.rb'
 
 class Go_ride
-	attr_reader :driver, :unit_price, :price, :destination, :user_loc
+	attr_reader :driver, :unit_price, :price, :destination, :user_loc, :route
 	attr_writer :unit_price
 
 	def initialize(arr_dest)
@@ -26,52 +26,17 @@ class Go_ride
 			end
 		end
 	end
-	def unit_cost(price = 3500)
-		@unit_price = price
-	end
+	#route printer
 	def show_route
 		@dest_tmp = @destination.map {|item| item+1}
 		@user_tmp = @user_loc.map {|item| item+1}
-		if @dest_tmp[0] < @user_tmp[0]
-			while @user_tmp[0] != @dest_tmp[0]
-				@user_tmp[0] -= 1
-				print " - go to ", @user_tmp, "\n" 
-			end
-			if @dest_tmp[1] < @user_tmp[1]
-				puts " - turn left"
-				while @user_tmp[1] != @dest_tmp[1]
-					@user_tmp[1] -= 1
-					print " - go to ", @user_tmp, "\n" 
-				end
-			else
-				puts " - turn right"
-				while @user_tmp[1] != @dest_tmp[1]
-					@user_tmp[1] += 1
-					print " - go to ", @user_tmp, "\n" 
-				end
-			end
-		else
-			while @user_tmp[0] != @dest_tmp[0]
-				@user_tmp[0] += 1
-				print " - go to ", @user_tmp, "\n" 
-			end
-			if @dest_tmp[1] < @user_tmp[1]
-				puts " - turn right"
-				while @user_tmp[1] != @dest_tmp[1]
-					@user_tmp[1] -= 1
-					print " - go to ", @user_tmp, "\n" 
-				end
-			else
-				puts " - turn left"
-				while @user_tmp[1] != @dest_tmp[1]
-					@user_tmp[1] += 1
-					print " - go to ", @user_tmp, "\n" 
-				end
-			end
-		end
+		@route = route_printer(@user_tmp, @dest_tmp)
+	end
+	def unit_cost(price = 3500)
+		@unit_price = price
 	end
 	def trip_price(destination)
-		@dest_dist = (destination[0]-@user_loc[0]).abs + (destination[1]-@user_loc[1]).abs + 1
+		@dest_dist = (destination[0]-@user_loc[0]).abs + (destination[1]-@user_loc[1]).abs
 		@price = @dest_dist*@unit_price
 	end
 end
@@ -99,13 +64,16 @@ module Exchange #'json-like' data for writing history info
 		arr_from = ride.user_loc.map {|i| i+1}
 		return arr_from
 	end
+	def Exchange.route(ride)
+		return ride.route
+	end
 end
 
 def	trip(ride)
 	puts "======================================"
 	print "Your driver is Mr. #", ride.driver[0]+ride.driver[1], "\n"
 	puts "Route to your destination:\n"
-	ride.show_route()
+	puts ride.show_route()
 	print "Your charge: Rp", ride.trip_price(ride.destination), "\n"
 	puts "======================================"
 	
@@ -120,4 +88,88 @@ def	trip(ride)
 	else
 		return flag = 0
 	end
+end
+
+def route_printer(user_location, destination)
+	route = " - start at " + user_location.to_s + "\n"
+	if user_location[0] < destination[0]
+		while user_location[0] != destination[0]
+			user_location[0] += 1
+			route += " - go to " + user_location.to_s + "\n" 
+		end
+		if user_location[1] < destination[1]
+			route += " - turn left\n"
+			while user_location[1] != destination[1]
+				if user_location[1]+1 == destination[1]
+					user_location[1] += 1
+					route += " - finish at " + user_location.to_s + "\n"
+				else
+					user_location[1] += 1
+					route += " - go to " + user_location.to_s + "\n"
+				end
+			end
+		else
+			route += " - turn right\n"
+			while user_location[1] != destination[1]
+				if user_location[1]-1 == destination[1]
+					user_location[1] -= 1
+					route += " - finish at " + user_location.to_s + "\n"
+				else
+					user_location[1] -= 1
+					route += " - go to " + user_location.to_s + "\n"
+				end
+			end
+		end
+	elsif user_location[0] > destination[0]
+		while user_location[0] != destination[0]
+			user_location[0] -= 1
+			route += " - go to " + user_location.to_s + "\n" 
+		end
+		if user_location[1] > destination[1]
+			route += " - turn left\n"
+			while user_location[1] != destination[1]
+				if user_location[1]-1 == destination[1]
+					user_location[1] -= 1
+					route += " - finish at " + user_location.to_s + "\n"
+				else
+					user_location[1] -= 1
+					route += " - go to " + user_location.to_s + "\n"
+				end
+			end
+		else
+			route += " - turn right\n"
+			while user_location[1] != destination[1]
+				if user_location[1]+1 == destination[1]
+					user_location[1] += 1
+					route += " - finish at " + user_location.to_s + "\n"
+				else
+					user_location[1] += 1
+					route += " - go to " + user_location.to_s + "\n"
+				end
+			end
+		end
+	else
+		if user_location[1] < destination[1]
+			while user_location[1] != destination[1]
+				if user_location[1]+1 == destination[1]
+					user_location[1] += 1
+					route += " - finish at " + user_location.to_s + "\n"
+				else
+					user_location[1] += 1
+					route += " - go to " + user_location.to_s + "\n"
+				end
+			end
+		else
+			while user_location[1] != destination[1]
+				if user_location[1]-1 == destination[1]
+					user_location[1] -= 1
+					route += " - finish at " + user_location.to_s + "\n"
+				else
+					user_location[1] -= 1
+					route += " - go to " + user_location.to_s + "\n"
+				end
+			end
+		end
+	end
+	return route
 end

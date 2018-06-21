@@ -9,10 +9,14 @@ class History
 		@price = Exchange::price(ride)
 		@destination = Exchange::destination(ride)
 		@from = Exchange::from(ride)
+		@route = Exchange::route(ride)
+		
 		file = File.open("classes & modules/trip_history.txt", "a+")
 		file.print "Order time: #{@time}\n"
 		file.puts "From: #{@from}"
 		file.puts "Destination: #{@destination}"
+		file.puts "Route: "
+		file.print @route
 		file.puts "Driver: Mr. ##{@driver_name}"
 		file.puts "Price: Rp #{@price}"
 		file.print "\n"

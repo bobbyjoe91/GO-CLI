@@ -3,7 +3,7 @@
 
 Developed as the second stage final assignment of SEA Compfest X
 
-GO-CLI is an transportation application for everyone. GO-CLI conects drivers and users through command-line interface program. For your daily transportation need, GO-CLI make the process of "ride-hailing" for every user easy.  This program also provides user the experience of using GO-CLI command line with intuitive syntaxes.
+GO-CLI is an transportation application that conects drivers and users through command-line interface program. For your daily transportation need, GO-CLI make the process of "ride-hailing" easy for every user.  This program also provides user the experience of using GO-CLI command line with intuitive syntaxes.
 
 ### Requirements and Installation
 GO-CLI.zip and Ruby 2.5.0 are required to run GO-CLI application. The most reccommended operating system for GO-CLI app is Linux and OSX because of the Terminal it has. GO-CLI requires Terminal or Bash Shell because its syntaxes can only be recognized by Terminal.

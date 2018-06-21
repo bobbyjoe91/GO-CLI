@@ -132,7 +132,7 @@ while true
 		print "\nSet your destination \n"
 		print "insert row: "
 		dest_x = STDIN.gets.chomp.to_i
-		print "\ninsert column: "
+		print "insert column: "
 		dest_y = STDIN.gets.chomp.to_i
 		print "\n"
 		_user.destination = [dest_x-1, dest_y-1]
