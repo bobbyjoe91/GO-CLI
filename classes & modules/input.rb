@@ -9,15 +9,17 @@ module Command
 	def Command.show_map(_map)
 		_map.showmap
 	end
-	def Command.order(_ride,_userloc,_driverloc)
+	def Command.order(_ride,_userloc,_driverloc, _unit_cost = "default")
+		if _unit_cost == "default"
+			_unit_cost = 3500
+		end
 		print "Searching nearest driver...\n"
 		sleep(3)
+		_unitcost = _unit_cost
 		_ride.pick_driver(_userloc, _driverloc)
-		_ride.set_unit_cost()
-		trip(_ride)
-	end
-	def Command.view_history
-		history_viewer
+		_ride.unit_cost(_unit_cost)
+		flag = trip(_ride)
+		return flag
 	end
 end
 
@@ -67,24 +69,31 @@ elsif args.length == 1
 #three params
 elsif args.length == 3
 	map_size = args[0].to_i
-	user_x = args[1].to_i
-	user_y = args[2].to_i
+	user_x = args[1].to_i-1
+	user_y = args[2].to_i-1
 	driver_count = 5
 	for i in 0...driver_count
 		driver_location << Generate::random_xy(map_size-1)
 	end
 end
-#class init
+#classes and vars init
 user_location = [user_x, user_y]
 _user = User.new(user_location)
 _driver = Driver.new(driver_location)
+_unit_cost = "default"
 map = Map.new(map_size, _user._loc, _driver.locations)
+flag = 0
 
 #program flow
 print "\nPlease enter the command: "
 _command = STDIN.gets.chomp
-while
+while true
 	if _command == "show map"
+		if flag == 1
+			#map change if trip has made
+			_user._loc = _user._dest
+			map = Map.new(map_size, _user._loc, _driver.locations)
+		end
 		Command::show_map(map)
 	elsif _command == "order go ride"
 		print "Set your destination: \n"
@@ -92,17 +101,19 @@ while
 		dest_y = STDIN.gets.chomp.to_i
 		_user.destination = [dest_x-1, dest_y-1]
 		ride = Go_ride.new(_user._dest)
-		Command::order(ride, _user._loc, _driver.locations)
-		#print _user._dest
+		flag = Command::order(ride, _user._loc, _driver.locations,_unit_cost)
 	elsif _command == "view history"
-		Command::view_history
+		history_viewer
 	elsif _command == "exit" || _command == "quit"
-		print "\nSee you next time"
+		print "\nThank you. See you next time"
 		for i in 1..3
 			print "."
 			sleep(0.5)
 		end
 		exit
+	elsif _command == "reset unit cost"
+		print "Insert new unit cost: "
+		_unit_cost = STDIN.gets.chomp.to_i
 	else
 		puts "Invalid command. Please try again"
 	end

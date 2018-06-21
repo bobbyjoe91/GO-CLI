@@ -10,15 +10,18 @@ class History
 		@destination = Exchange::destination(ride)
 		file = File.open("trip_history.txt", "a+")
 		file.puts "Order time: #{@time}"
-		file.puts "Destination: Mr. ##{@destination}"
-		file.puts "Driver: Rp #{@driver_name}"
-		file.puts "Price: #{@price}"
+		file.puts "Destination: #{@destination}"
+		file.puts "Driver: Mr. ##{@driver_name}"
+		file.puts "Price: Rp #{@price}"
 		file.print "\n"
+		file.close
 	end
 end
 
 def history_viewer
-	file = File.open("trip_history.txt", "r+")
-	print "\n"
-	puts file.read
+	file = File.open("trip_history.txt", 'r')
+	while !file.eof?
+		line = file.readline
+		puts line
+	end
 end

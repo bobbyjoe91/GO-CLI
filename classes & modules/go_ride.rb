@@ -26,7 +26,7 @@ class Go_ride
 			end
 		end
 	end
-	def set_unit_cost(price = 3500)
+	def unit_cost(price = 3500)
 		@unit_price = price
 	end
 	def show_route
@@ -109,15 +109,10 @@ def	trip(ride)
 	print "\n"
 	if ans == "Y" || ans == "y"
 		print "Please wait...\n"
-	elsif
-		while(ans == "N" || ans == "n")
-			print "Please wait...\n"
-			sleep(2)
-			print "Confirm trip [Y/n]: "
-			ans = STDIN.gets.chomp
-			print "\n"
-		end
+		Confirm::message
+		history = History.new(ride)
+		return flag = 1
+	else
+		return flag = 0
 	end
-	Confirm::message
-	history = History.new(ride)
 end
