@@ -92,10 +92,12 @@ module Exchange #'json-like' data for writing history info
 		return ride.trip_price(ride.destination)
 	end
 	def Exchange.destination(ride)
-		return ride.destination
+		arr_des = ride.destination.map {|i| i+1}
+		return arr_des
 	end
 	def Exchange.from(ride)
-		return ride.user_loc
+		arr_from = ride.user_loc.map {|i| i+1}
+		return arr_from
 	end
 end
 

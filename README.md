@@ -160,10 +160,11 @@ Type `view history` to view history. The history will like the following lines:
 ```
 Please enter the command: view history
 
-Order time: Thursday, 21 Jun 2018, 23:22:53
-Destination: [2, 4]
-Driver: Mr. #25
-Price: Rp 84000
+Order time: Wednesday, 20 Jun 2018, 09:09:36
+From: [1, 1]
+Destination: [2, 2]
+Driver: Mr. #12
+Price: Rp 10500
 
 ```
 
