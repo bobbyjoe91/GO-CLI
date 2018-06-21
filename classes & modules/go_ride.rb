@@ -83,7 +83,7 @@ module Confirm
 	end
 end
 
-module Exchange #json-like data for writing history
+module Exchange #'json-like' data for writing history info
 	def Exchange.driver(ride)
 		driver_name = ride.driver[0] + ride.driver[1]
 		return driver_name

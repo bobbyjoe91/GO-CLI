@@ -104,6 +104,9 @@ while true
 		flag = Command::order(ride, _user._loc, _driver.locations,_unit_cost)
 	elsif _command == "view history"
 		history_viewer
+	elsif _command == "erase history"
+		history_eraser
+		puts "History has been cleaned"
 	elsif _command == "exit" || _command == "quit"
 		print "\nThank you. See you next time"
 		for i in 1..3
