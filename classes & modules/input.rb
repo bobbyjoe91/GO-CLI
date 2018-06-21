@@ -32,9 +32,10 @@ module Command
 		puts "\n--------------------------------------------------------------------------------"
 	end
 	def Command.about
-		puts "\nDeveloped by Bobby Jonathan", "for SEA COMPFEST X 2nd assignment"
+		puts "\nGO-CLI 1.0.0"
+		puts "Developed by Bobby Jonathan", "for SEA COMPFEST X 2nd assignment"
 		puts "Since 2018"
-		puts "---------------", "Found a bug?", "bobby.cool00763@gmail.com", "---------------"
+		puts "---------------", "Found a bug? Contact me", "bobby.cool00763@gmail.com", "---------------"
 	end
 end
 
