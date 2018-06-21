@@ -16,5 +16,5 @@ puts "                  =========================================== "
 puts "\n                       type 'help' if you need more info"
 
 #user's input of command line
-require_relative 'classes & modules/input.rb'
+require_relative 'classes & modules/program_flow.rb'
                

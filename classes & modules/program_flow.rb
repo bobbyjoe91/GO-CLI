@@ -4,51 +4,10 @@ require_relative 'driver.rb'
 require_relative 'go_ride.rb'
 require_relative 'map.rb'
 require_relative 'history.rb'
-
-module Command
-	def Command.show_map(_map)
-		_map.showmap
-	end
-	def Command.order(_ride,_userloc,_driverloc, _unit_cost = "default")
-		if _unit_cost == "default"
-			_unit_cost = 3500
-		end
-		print "Searching nearest driver...\n"
-		sleep(3)
-		_unitcost = _unit_cost
-		_ride.pick_driver(_userloc, _driverloc)
-		_ride.unit_cost(_unit_cost)
-		flag = trip(_ride)
-		return flag
-	end
-	def Command.help
-		puts "\n                         GO-CLI's guide for user"
-		puts "\nshow map -- shows map indicating user's (V) and drivers'(O) location"
-		puts "order go ride -- allocates nearest driver to give user a lift"
-		puts "view history -- shows all trip user had made"
-		puts "clear history -- clean history"
-		puts "exit \\ quit -- close GO-CLI"
-		puts "about -- about developer"
-		puts "\n--------------------------------------------------------------------------------"
-	end
-	def Command.about
-		puts "\nGO-CLI 1.0.0"
-		puts "Developed by Bobby Jonathan", "for SEA COMPFEST X 2nd assignment"
-		puts "Since 2018"
-		puts "---------------", "Found a bug? Contact me", "bobby.cool00763@gmail.com", "---------------"
-	end
-	def Command.refresh(driver_count, map_size)
-		driver_location = []
-		for i in 0...driver_count
-			driver_location << Generate::random_xy(map_size-1)
-		end
-		return driver_location
-	end
-end
+require_relative 'command.rb'
 
 #INPUT PROGRAM
-
-#init
+#args init
 args = []
 driver_location = []
 user_location = []
@@ -119,16 +78,13 @@ _unit_cost = "default"
 map = Map.new(map_size, _user._loc, _driver.locations)
 flag = 0
 
-#program flow
+
+
+#PROGRAM FLOW
 print "\nPlease enter the command: "
 _command = STDIN.gets.chomp
 while true
 	if _command == "show map"
-		if flag == 1 #map change if trip has been confirmed
-			_user._loc = _user._dest
-			_driver.locations = Command::refresh(driver_count, map_size)
-			map = Map.new(map_size, _user._loc, _driver.locations)
-		end
 		Command::show_map(map)
 		
 	elsif _command == "order go ride"
@@ -149,7 +105,7 @@ while true
 		end
 		
 	elsif _command == "view history"
-		history_viewer #only accessible through GO-CLI.rb
+		history_viewer
 		
 	elsif _command == "clear history"
 		history_eraser
@@ -173,12 +129,20 @@ while true
 	elsif _command == "about"
 		Command::about
 		
-	elsif _command == "refresh"
-		_driver.locations = Command::refresh(driver_count, map_size)
+	elsif _command == "reload map"
+		_driver.locations = Command::reload_map(driver_count, map_size)
 		map = Map.new(map_size, _user._loc, _driver.locations)
+		Command::show_map(map)
 		
 	else
 		puts "Invalid command. Please try again"
+	end
+	
+	if flag == 1 #map change if trip has been confirmed
+		_user._loc = _user._dest
+		_driver.locations = Command::reload_map(driver_count, map_size)
+		map = Map.new(map_size, _user._loc, _driver.locations)
+		flag = 0
 	end
 	
 	print "\nPlease enter the command: "

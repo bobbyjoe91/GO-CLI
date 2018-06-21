@@ -186,17 +186,21 @@ Price: Rp 59500
 History can also be cleared completely by typing `clear history`.
 
 ### For Developer: Program Control and Design Rationale
-In GO-CLI.zip, main menu file (GO-CLI.rb) and a "classes and modules" folder are included. "Classes and modules" folder includes driver.rb, generator.rb, go_ride.rb, history.rb, input.rb, map.rb, and user.rb. These files manage different object.
+In GO-CLI.zip, main menu file (GO-CLI.rb) and a "classes and modules" folder are included. GO-CLI.rb itself serves as the main menu or front-end of GO-CLI. It also receive command line input by user. All of this are possible because of path loading of program_flow.rb which controls input, output, and program flow mechanisms. "Classes and modules" folder includes driver.rb, generator.rb, go_ride.rb, history.rb, program_flow.rb, map.rb, and user.rb. These files manage different objects.
 
 Driver.rb is used for initializing driver object by passing array of coordinate of five or user-specified number of drivers.
 
 User.rb is used for initializing user object by its location. User class also has destination class to set and store its destination.
 
-If user specifies the number of drivers in input file, input.rb will parse the file and pass an array of driver coordinates as much as user specifies.
+If user specifies the number of drivers in input file, program_flow.rb will parse the file and pass an array of driver coordinates as much as user specifies.
 
-Generator.rb is file with Generate module which used by input.rb to generate random coordinate
+Generator.rb is file with Generate module which used by program_flow.rb to generate random coordinate
 
-Input.rb manages three input mechanisms mentioned before, and it passes variables to some classes and call all functions from all files in this program.
+Map.rb is used for initializing map with size, user and drivers location, and also displaying the map to the screen.
+
+
+
+Program_flow.rb manages three input mechanisms mentioned before, and it passes variables to some classes and call all functions from all files in this program.
 
 
 
