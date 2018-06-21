@@ -4,7 +4,7 @@ require_relative 'map.rb'
 require_relative 'history.rb'
 
 class Go_ride
-	attr_reader :driver, :unit_price, :price, :destination
+	attr_reader :driver, :unit_price, :price, :destination, :user_loc
 	attr_writer :unit_price
 
 	def initialize(arr_dest)
@@ -93,6 +93,9 @@ module Exchange #'json-like' data for writing history info
 	end
 	def Exchange.destination(ride)
 		return ride.destination
+	end
+	def Exchange.from(ride)
+		return ride.user_loc
 	end
 end
 
