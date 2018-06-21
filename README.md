@@ -26,15 +26,25 @@ The other way to use GO-CLI is by determining the n size of the map and x,y posi
 ```
 ruby GO-CLI.rb n x y
 ```
-where n is the size of map (nxn), x is row position of user, and y is column position of user. This will generate five drivers with random position. 
+where n is the size of map (nxn), x is row position of user, and y is column position of user. x and y is in range of 1 to n to make the usage intuitive for non-programer user. Five drivers will be generated with random position. 
 
 Another yet powerful way to use GO-CLI is by typing the filename in the command line
 ```
 ruby GO-CLI.rb filename.extension
 ```
-GO-CLI is able to open any document file extensions. There is a format that you have to follow so GO-CLi can recognize your input
+GO-CLI is able to open any document file extensions. There is a format that you have to follow so GO-CLi can recognize your input.
 ```
-
+n user_row user_column m
+driver_row_1 driver_column_1
+driver_row_2 driver_column_2
+.           .
+.           .
+.           .
+driver_row_m driver_column_m
 ```
+n is the size of the map. user_row and user_column denotes user position in column and row. m is the number of drivers available. This first line of input is ended with "Enter" or newline and each input is separated with space. The next m line is drivers' row and column position separated with space. First driver position to m-th driver position is ended with newline.
 
-Driver may be in the same place as user, but GO-CLI guarantees that user's position is still trackable in this app.
+This way of inputing will make each number distinguishable and make another users, drivers, and developers easy to read your input.
+
+#### GO-CLI interface
+
