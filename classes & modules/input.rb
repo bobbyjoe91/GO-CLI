@@ -129,9 +129,12 @@ while true
 		Command::show_map(map)
 		
 	elsif _command == "order go ride"
-		print "Set your destination: \n"
+		print "\nSet your destination \n"
+		print "insert row: "
 		dest_x = STDIN.gets.chomp.to_i
+		print "\ninsert column: "
 		dest_y = STDIN.gets.chomp.to_i
+		print "\n"
 		_user.destination = [dest_x-1, dest_y-1]
 		if _user._dest == _user._loc || !_user._dest[0].is_a?(Integer) || !_user._dest[1].is_a?(Integer)
 			puts "Invalid location. Please try again."
