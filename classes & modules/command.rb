@@ -10,7 +10,7 @@ module Command
 		sleep(3)
 		_unitcost = _unit_cost
 		_ride.pick_driver(_userloc, _driverloc)
-		_ride.unit_cost(_unit_cost)
+		_ride.unit_price = _unit_cost
 		flag = trip(_ride)
 		return flag
 	end

@@ -4,7 +4,7 @@ require_relative 'map.rb'
 require_relative 'history.rb'
 
 class Go_ride
-	attr_reader :driver, :unit_price, :price, :destination, :user_loc, :route
+	attr_reader :driver, :price, :destination, :user_loc, :route
 	attr_writer :unit_price
 
 	def initialize(arr_dest)
@@ -84,6 +84,7 @@ def	trip(ride)
 		print "Please wait...\n"
 		Confirm::message
 		history = History.new(ride)
+		history.writer
 		return flag = 1
 	else
 		return flag = 0

@@ -63,7 +63,6 @@ This way of inputing will make each number distinguishable and make another user
                        type 'help' if you need more info
 
 Please enter the command: _
-
 ```
 This is the interface of GO-CLI main menu. For new user, it's recommended to type help in the CLI. Here are some command line user can input in GO-CLI
 ```
@@ -99,9 +98,10 @@ To show the map, simply type `show map` in the CLI. The random map will look lik
 ....................
 ....................
 ....................
-
 ```
 Once the map is printed, there are dots, a V and some Os. Dots (.) represent empty road in the area, V represents user's location, and O represents the drivers' location.
+
+Map can also be updated/ reloaded by typing `reload map` in the CLI. It will randomize new position of drivers and show the new map.
 
 #### Ordering Go-Ride
 The main service give to user is Go-Ride. This app will connect you with at least five Go-Ride drivers around you. Simply type `order go ride`, and you'll have to input row and column of your destination
@@ -140,7 +140,6 @@ Route to your destination:
 Trip price: Rp59500
 ======================================
 Confirm trip [Y/n]: 
-
 ```
 If you cancel the trip, you'll be brought back to "Please enter the command: " menu. Else, your driver will go to your position and your trip will be recorded in history. Happy riding!
 ```
@@ -149,6 +148,8 @@ Confirm trip [Y/n]: Y
 Please wait...
 Yeay, you have arrived! Thank you
 ```
+
+Once you've arrived at your current position, your map will update user and driver coordinates. This also make the history writes a new "from" location if you make another new trip.
 
 #### Viewing History
 Type `view history` to view history. The history will pass your past order time, your location before the trip/ order, your destination, driver's name, the route from your past location to your past desination, and the price of the trip.
@@ -180,32 +181,32 @@ Route:
  - go to [4, 4]
  - finish at [4, 5]
 Price: Rp 59500
-
 ```
 
 History can also be cleared completely by typing `clear history`.
 
+#### Quitting Program
+There are two ways to quit from the program. You can type `quit` if you're familiar with it. Another way is by typing `exit`.
+
 ### For Developer: Program Control and Design Rationale
-In GO-CLI.zip, main menu file (GO-CLI.rb) and a "classes and modules" folder are included. GO-CLI.rb itself serves as the main menu or front-end of GO-CLI. It also receive command line input by user. All of this are possible because of path loading of program_flow.rb which controls input, output, and program flow mechanisms. "Classes and modules" folder includes driver.rb, generator.rb, go_ride.rb, history.rb, program_flow.rb, map.rb, and user.rb. These files manage different objects.
+
+In GO-CLI.zip, main menu file (GO-CLI.rb) and a "classes and modules" folder are included. GO-CLI.rb itself serves as the main menu or front-end of GO-CLI. It also receive command line input by user. All of this are possible because of path loading of program\_flow.rb which controls input, output, and program flow mechanisms. "Classes and modules" folder includes driver.rb, generator.rb, go_ride.rb, history.rb, program_flow.rb, map.rb, command.rb and user.rb. These files manage different objects.
 
 Driver.rb is used for initializing driver object by passing array of coordinate of five or user-specified number of drivers.
 
 User.rb is used for initializing user object by its location. User class also has destination class to set and store its destination.
+If user specifies the number of drivers in input file, program\_flow.rb will parse the file and pass an array of drivers' coordinate as much as user specifies.
 
-If user specifies the number of drivers in input file, program_flow.rb will parse the file and pass an array of driver coordinates as much as user specifies.
+Generator.rb is file with Generate module which used by program\_flow.rb to generate random coordinate. Command.rb also contains module called Command which has series of syntaxes in each function. Each funtion of module does specific tasks. For achieving simplicity and modularity, generator.rb and command.rb are separated from program\_flow.rb.
 
-Generator.rb is file with Generate module which used by program_flow.rb to generate random coordinate
+Map.rb is used for initializing map with size, user and drivers location as parameters; and also displaying the map to the screen.
 
-Map.rb is used for initializing map with size, user and drivers location, and also displaying the map to the screen.
+Go\_ride.rb is a class which models Go-Ride order, show trip route & price, and send Exchage modules to history.rb.
 
+History.rb is an object for writing and showing all trip history. History.rb receives modules from go\_ride.rb as the source to write history. History 
 
+Program\_flow.rb manages three input mechanisms mentioned before, and it passes variables to some classes and call all functions from all files in this program.
 
-Program_flow.rb manages three input mechanisms mentioned before, and it passes variables to some classes and call all functions from all files in this program.
+All method in this program is set to public because there are a lot of data in the method which return a value, but not all variable are given accessor. It is done to keep some variables secret to users.
 
-
-
-When user `show map`, method showmap in map.rb is called.
-
-When user order go ride, input.rb passes user destination, user location, and drivers locations to go_ride.rb. A funtion called trip will uses Go_ride method like Go_ride.pick_drive to pick a nearest driver based on Manhattan distance, Go_ride.show_route to show the route to user and driver, and Go_ride.trip_price to count price of a ride based on unit cost and distance. After that Exchange module will pass some values to history.rb for history record.
-
-The program simply read and print the content of trip_history.txt for `view history` command line. Txt file is chosen as its format because of its open-source and light charateristic so user can open it in any computer.
+Actually, this program has two dynamic feature: it will always update user and drivers position after a trip is confirmed, it can reload map to update drivers' coordinate. Those two features has one goal: to make GO-CLI resemble recent transportation applications.

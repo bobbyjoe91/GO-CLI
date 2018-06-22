@@ -1,7 +1,6 @@
 require 'date'
 
 class History
-	attr_reader :time
 	#history writer to trip_history.txt
 	def initialize(ride)
 		@time = Time.now.strftime('%A, %d %b %Y, %H:%M:%S')
@@ -10,7 +9,8 @@ class History
 		@destination = Exchange::destination(ride)
 		@from = Exchange::from(ride)
 		@route = Exchange::route(ride)
-		
+	end
+	def writer
 		file = File.open("classes & modules/trip_history.txt", "a+")
 		file.print "Order time: #{@time}\n"
 		file.puts "From: #{@from}"
