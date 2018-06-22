@@ -199,7 +199,7 @@ If user specifies the number of drivers in input file, program\_flow.rb will par
 
 Generator.rb is file with Generate module which used by program\_flow.rb to generate random coordinate. Command.rb also contains module called Command which has series of syntaxes in each function. Each funtion of module does specific tasks. For achieving simplicity and modularity, generator.rb and command.rb are separated from program\_flow.rb.
 
-Map.rb is used for initializing map with size, user and drivers location as parameters; and also displaying the map to the screen.
+Map.rb is used for initializing map with size, user and drivers location as parameters; and also displaying the map to the screen. It may be possible that driver is in the same coordinate as user, but this program will print user's location after printing driver's location so user can still determine his/ her position.
 
 Go\_ride.rb is a class which models Go-Ride order, show trip route & price, and send Exchage modules to history.rb.
 
