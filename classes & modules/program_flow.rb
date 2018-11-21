@@ -10,7 +10,6 @@ require_relative 'command.rb'
 #args init
 args = []
 driver_location = []
-user_location = []
 args = ARGV
 #no param
 if args.length == 0
@@ -71,8 +70,7 @@ elsif args.length == 3
 end
 
 #classes and vars init
-user_location = user_coord
-_user = User.new(user_location)
+_user = User.new(user_coord)
 _driver = Driver.new(driver_location)
 _unit_cost = "default"
 map = Map.new(map_size, _user._loc, _driver.locations)
@@ -86,6 +84,7 @@ _command = STDIN.gets.chomp
 while true
 	if _command == "show map"
 		Command::show_map(map)
+		puts "You are in [#{_user._loc[0]+1}, #{_user._loc[1]+1}]"
 
 	elsif _command == "order go ride"
 		order_status = true
@@ -105,7 +104,7 @@ while true
 					puts "You have been in the destination."
 				elsif !(dest_x-1).is_a?(Integer) || !(dest_y-1).is_a?(Integer)
 					puts "Invalid location. Please try again."
-				elsif dest_x-1 > map_size || dest_y-1 > map_size || dest_y-1 < 0 || dest_x-1 < 0
+				elsif dest_x-1 > map_size-1 || dest_y-1 > map_size-1 || dest_y-1 < 0 || dest_x-1 < 0
 					puts "Location is out of range. Please try again."
 				else
 					_user.destination = [dest_x-1, dest_y-1]
@@ -146,6 +145,7 @@ while true
 		_driver.locations = Command::reload_map(driver_count, map_size)
 		map = Map.new(map_size, _user._loc, _driver.locations)
 		Command::show_map(map)
+		puts "You are in [#{_user._loc[0]+1}, #{_user._loc[1]+1}]"
 
 	else
 		puts "Invalid command. Please try again"
