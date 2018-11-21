@@ -86,65 +86,78 @@ _command = STDIN.gets.chomp
 while true
 	if _command == "show map"
 		Command::show_map(map)
-		
+
 	elsif _command == "order go ride"
-		print "\nSet your destination \n"
-		print "insert row   : "
-		dest_x = STDIN.gets.chomp.to_i
-		print "insert column: "
-		dest_y = STDIN.gets.chomp.to_i
-		print "\n"
-		if [dest_x-1, dest_y-1] == _user._loc || !(dest_x-1).is_a?(Integer) || !(dest_y-1).is_a?(Integer)
-			puts "Invalid location. Please try again."
-		elsif dest_x-1 > map_size || dest_y-1 > map_size || dest_y-1 < 0 || dest_x-1 < 0
-			puts "Location is out of range. Please try again."
-		else
-			_user.destination = [dest_x-1, dest_y-1]
-			ride = Go_ride.new(_user._dest)
-			flag = Command::order(ride, _user._loc, _driver.locations,_unit_cost)
+		order_status = true
+		while order_status
+			print "\nSet your destination \n"
+			print "insert row   : "
+			dest_x = STDIN.gets.chomp
+			if dest_x == "cancel"
+				puts "Order cancelled."
+				order_status = false
+			else
+				dest_x = dest_x.to_i
+				print "insert column: "
+				dest_y = STDIN.gets.chomp.to_i
+				print "\n"
+				if [dest_x-1, dest_y-1] == _user._loc
+					puts "You have been in the destination."
+				elsif !(dest_x-1).is_a?(Integer) || !(dest_y-1).is_a?(Integer)
+					puts "Invalid location. Please try again."
+				elsif dest_x-1 > map_size || dest_y-1 > map_size || dest_y-1 < 0 || dest_x-1 < 0
+					puts "Location is out of range. Please try again."
+				else
+					_user.destination = [dest_x-1, dest_y-1]
+					ride = Go_ride.new(_user._dest)
+					flag = Command::order(ride, _user._loc, _driver.locations,_unit_cost)
+					order_status = false
+				end
+			end
 		end
-		
+
 	elsif _command == "view history"
 		history_viewer
-		
+
 	elsif _command == "clear history"
 		history_eraser
 		puts "History has been cleared"
-		
+
 	elsif _command == "exit" || _command == "quit"
 		print "\nThank you. See you next time"
 		for i in 1..3
 			print "."
 			sleep(0.5)
 		end
+		print "\n"
 		exit
-		
+
 	elsif _command == "reset unit cost"
 		print "Insert new unit cost: "
 		_unit_cost = STDIN.gets.chomp.to_i
-		
+
 	elsif _command == "help"
 		Command::help
-		
+
 	elsif _command == "about"
 		Command::about
-		
+
 	elsif _command == "reload map"
 		_driver.locations = Command::reload_map(driver_count, map_size)
 		map = Map.new(map_size, _user._loc, _driver.locations)
 		Command::show_map(map)
-		
+
 	else
 		puts "Invalid command. Please try again"
 	end
-	
+
 	if flag == 1 #map change if trip has been confirmed
 		_user._loc = _user._dest
 		_driver.locations = Command::reload_map(driver_count, map_size)
 		map = Map.new(map_size, _user._loc, _driver.locations)
 		flag = 0
 	end
-	
+
 	print "\nPlease enter the command: "
 	_command = STDIN.gets.chomp
 end

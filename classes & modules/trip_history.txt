@@ -1,0 +1,19 @@
+Order time: Wednesday, 21 Nov 2018, 22:28:46
+From: [11, 14]
+Destination: [5, 10]
+Driver: Mr. #22
+Route: 
+ - start at [11, 14]
+ - go to [10, 14]
+ - go to [9, 14]
+ - go to [8, 14]
+ - go to [7, 14]
+ - go to [6, 14]
+ - go to [5, 14]
+ - turn left
+ - go to [5, 13]
+ - go to [5, 12]
+ - go to [5, 11]
+ - finish at [5, 10]
+Price: Rp 35000
+
